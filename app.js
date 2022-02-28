@@ -1,4 +1,4 @@
-const loadPhoneData = () => {
+const loadProductData = () => {
     const input = document.getElementById("search-input");
     const inputValue = input.value;
     const inputValueLowerCase = inputValue.toLowerCase();
@@ -8,11 +8,11 @@ const loadPhoneData = () => {
     // fetching the url
     fetch(url)
         .then(res => res.json())
-        .then(data => displayPhonCard(data))
+        .then(data => displayProductCard(data))
 
 }
 
-const displayPhonCard = (data) => {
+const displayProductCard = (data) => {
     const inputError = document.getElementById('input-error')
     if (data.status == false) {
         inputError.classList.remove('d-none')
@@ -52,6 +52,7 @@ const displayCardDetail = (data) => {
     const productDetail = data.data;
     const cardDetails = document.getElementById('card-details');
     const mainFeatures = Object.entries(productDetail.mainFeatures);
+    const otherFeatures = Object.entries(productDetail.others);
 
     cardDetails.textContent = "";
     cardDetails.innerHTML = `
@@ -65,10 +66,23 @@ const displayCardDetail = (data) => {
                     <p class="text-danger">${productDetail.releaseDate ? productDetail.releaseDate : 'not available'}</p>
                     <h5>Main features</h5>
                     <ul id="features"></ul>
+                    <h5>Other features</h5>
+                    <ul id="other-features"></ul>
                 </div>
             </div>
-                
     `
-
-    // console.log(productDetail);
+    // adding features inside card details
+    const mainFeaturesId = document.getElementById('features');
+    mainFeatures.forEach(feature => {
+        const li = document.createElement('li')
+        li.innerHTML = `${feature[0]}: ${feature[1]}.`;
+        mainFeaturesId.appendChild(li);
+    })
+    // adding other features inside card details
+    const otherFeaturesId = document.getElementById('other-features');
+    otherFeatures.forEach(feature => {
+        const li = document.createElement('li')
+        li.innerHTML = `${feature[0]}: ${feature[1]}.`;
+        otherFeaturesId.appendChild(li);
+    })
 }
