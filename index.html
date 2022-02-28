@@ -8,6 +8,7 @@
     <title>PhoneShop</title>
     <!-- bootstrap css link -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 
 </head>
 
@@ -15,8 +16,28 @@
     <header class="mt-3 mb-5">
         <h1 class="text-center text-success">Welcome to PhoneShop</h1>
     </header>
-    <main class="containe">
+    <main class="container">
+        <!-- search section -->
+        <section class="mb-5">
+            <div class="input-group">
+                <input id="search-input" type="search" class="form-control" placeholder="Search anything...">
+                <button id="search-button" onclick="loadPhoneCards()" class="btn btn-primary px-3">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+            <!-- input error -->
+            <div id="input-error" class="text-danger d-none">
+                <p>please wite a phone name.</p>
+            </div>
+        </section>
+        <!-- card details section -->
+        <section>
 
+        </section>
+        <!-- card section -->
+        <section>
+
+        </section>
     </main>
 
     <!-- javascript file -->
