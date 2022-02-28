@@ -14,20 +14,20 @@
 
 <body>
     <header class="mt-3 mb-5">
-        <h1 class="text-center text-success">Welcome to PhoneShop</h1>
+        <h1 class="text-center text-primary">Welcome to PhoneShop</h1>
     </header>
     <main class="container">
         <!-- search section -->
         <section class="mb-5">
             <div class="input-group">
-                <input id="search-input" type="search" class="form-control" placeholder="Search anything...">
-                <button id="search-button" onclick="loadPhoneCards()" class="btn btn-primary px-3">
+                <input id="search-input" type="search" class="form-control" placeholder="please write your phone name">
+                <button id="search-button" onclick="loadPhoneData()" class="btn btn-primary px-3">
                     <i class="fa fa-search"></i>
                 </button>
             </div>
             <!-- input error -->
             <div id="input-error" class="text-danger d-none">
-                <p>please wite a phone name.</p>
+                <p>Incorrect input. Please write a product name.</p>
             </div>
         </section>
         <!-- card details section -->
@@ -36,7 +36,9 @@
         </section>
         <!-- card section -->
         <section>
+            <div id="card-container" class="row g-4">
 
+            </div>
         </section>
     </main>
 
