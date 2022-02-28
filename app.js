@@ -20,10 +20,12 @@ const displayProductCard = (data) => {
         inputError.classList.add('d-none')
         const products = data.data.slice(0, 20);
         const cardContainer = document.getElementById('card-container')
+        const cardDetails = document.getElementById('card-details');
+        cardDetails.textContent = "";
         cardContainer.textContent = "";
         products.forEach(product => {
             const div = document.createElement('div');
-            div.className = "col-lg-4 co-sm-12"
+            div.className = "col-lg-4"
             div.innerHTML = `
                     <div class="card h-100">
                         <img src="${product.image}"
@@ -49,40 +51,51 @@ const loadCardDetail = (id) => {
 }
 
 const displayCardDetail = (data) => {
+    console.log(data);
     const productDetail = data.data;
     const cardDetails = document.getElementById('card-details');
     const mainFeatures = Object.entries(productDetail.mainFeatures);
-    const otherFeatures = Object.entries(productDetail.others);
+    const otherFeatures = Object.entries(productDetail.others ? productDetail.others : ['not available']);
 
-    cardDetails.textContent = "";
     cardDetails.innerHTML = `
             <div  class="row p-5 bg-white shadow my-5">
-                <div class="col-lg-6 col-sm-12">
+                <div class="col-lg-6">
                     <img src="${productDetail.image}"
                         class="img-fluid w-100 rounded" alt="">
                 </div>
-                <div class="col-lg-6 col-sm-12 border-start border-dark border-3 p-5">
+                <div class="col-lg-6 border-start border-dark border-3">
                     <h1>${productDetail.name}</h1>
                     <p class="text-danger">${productDetail.releaseDate ? productDetail.releaseDate : 'not available'}</p>
-                    <h5>Main features</h5>
-                    <ul id="features"></ul>
-                    <h5>Other features</h5>
-                    <ul id="other-features"></ul>
+                    <h4 class="mt-4"><u>Main features</u></h4>
+                    <p id="features"></p>
+                    <ul id="sensors"></ul>
+                    <h4 class="mt-4"><u>Other features</u></h4>
+                    <p id="other-features"></p>
                 </div>
             </div>
     `
     // adding features inside card details
     const mainFeaturesId = document.getElementById('features');
+    const sensorsId = document.getElementById('sensors');
     mainFeatures.forEach(feature => {
-        const li = document.createElement('li')
-        li.innerHTML = `${feature[0]}: ${feature[1]}.`;
-        mainFeaturesId.appendChild(li);
+        const p = document.createElement('p')
+        p.innerHTML = `<strong>${feature[0]}:</strong> ${feature[1]}.`;
+        if (Array.isArray(feature[1])) {
+            sensorsId.innerHTML = `<strong>${feature[0]}:</strong> `;
+            for (const sensors of feature[1]) {
+                const li = document.createElement('li')
+                li.innerHTML = `${sensors}`;
+                sensorsId.appendChild(li)
+            }
+        } else {
+            mainFeaturesId.appendChild(p);
+        }
     })
     // adding other features inside card details
     const otherFeaturesId = document.getElementById('other-features');
     otherFeatures.forEach(feature => {
-        const li = document.createElement('li')
-        li.innerHTML = `${feature[0]}: ${feature[1]}.`;
-        otherFeaturesId.appendChild(li);
+        const p = document.createElement('p')
+        p.innerHTML = `<strong>${feature[0]}:</strong> ${feature[1]}.`;
+        otherFeaturesId.appendChild(p);
     })
 }
