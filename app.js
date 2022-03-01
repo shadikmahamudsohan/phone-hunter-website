@@ -1,6 +1,7 @@
 // spinner id
 const spinner = document.getElementById('spinner');
-const cardContainer = document.getElementById('card-container')
+// card container id
+const cardContainer = document.getElementById('card-container');
 
 
 // arrow function for loading data from api
@@ -10,9 +11,9 @@ const loadProductData = () => {
     const inputValueLowerCase = inputValue.toLowerCase();
     // clearing input
     input.value = "";
-    const url = `https://openapi.programming-hero.com/api/phones?search=${inputValueLowerCase}`
+    const url = `https://openapi.programming-hero.com/api/phones?search=${inputValueLowerCase}`;
     // adding spinner when searching
-    spinner.classList.remove('d-none')
+    spinner.classList.remove('d-none');
     // clearing card container when searching
     cardContainer.textContent = "";
     // fetching the url
@@ -28,21 +29,21 @@ const displayProductCard = (data) => {
     const inputError = document.getElementById('input-error')
 
     // removing spinner when data is loaded
-    spinner.classList.add('d-none')
+    spinner.classList.add('d-none');
 
     // clearing cards and card details
     cardDetails.textContent = "";
 
     // condition for wrong input
     if (data.status == false) {
-        inputError.classList.remove('d-none')
+        inputError.classList.remove('d-none');
     } else {
-        inputError.classList.add('d-none')
+        inputError.classList.add('d-none');
         const products = data.data.slice(0, 20);
 
         products.forEach(product => {
             const div = document.createElement('div');
-            div.className = "col-lg-4"
+            div.className = "col-lg-4";
 
             // showing cards
             div.innerHTML = `
@@ -76,8 +77,7 @@ const loadCardDetail = (id) => {
 // arrow function for displaying details
 const displayCardDetail = (data) => {
     // removing spinner when data is loaded
-    spinner.classList.add('d-none')
-    console.log(data);
+    spinner.classList.add('d-none');
     const productDetail = data.data;
     const cardDetails = document.getElementById('card-details');
     const mainFeatures = Object.entries(productDetail.mainFeatures);
@@ -113,9 +113,9 @@ const displayCardDetail = (data) => {
         if (Array.isArray(feature[1])) {
             sensorsId.innerHTML = `<strong>${feature[0]}: </strong>`;
             for (const sensors of feature[1]) {
-                const span = document.createElement('span')
+                const span = document.createElement('span');
                 span.innerHTML = `${sensors}. `;
-                sensorsId.appendChild(span)
+                sensorsId.appendChild(span);
             }
         } else {
             mainFeaturesId.appendChild(p);
@@ -126,7 +126,7 @@ const displayCardDetail = (data) => {
 
     // looping trough all the other features
     otherFeatures.forEach(feature => {
-        const p = document.createElement('p')
+        const p = document.createElement('p');
         p.innerHTML = `<strong>${feature[0]}:</strong> ${feature[1]}.`;
         otherFeaturesId.appendChild(p);
     })
