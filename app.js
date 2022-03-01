@@ -1,3 +1,8 @@
+// spinner id
+const spinner = document.getElementById('spinner');
+const cardContainer = document.getElementById('card-container')
+
+
 // arrow function for loading data from api
 const loadProductData = () => {
     const input = document.getElementById("search-input");
@@ -6,6 +11,10 @@ const loadProductData = () => {
     // clearing input
     input.value = "";
     const url = `https://openapi.programming-hero.com/api/phones?search=${inputValueLowerCase}`
+    // adding spinner when searching
+    spinner.classList.remove('d-none')
+    // clearing card container when searching
+    cardContainer.textContent = "";
     // fetching the url
     fetch(url)
         .then(res => res.json())
@@ -15,12 +24,16 @@ const loadProductData = () => {
 
 // arrow function for displaying data inside html
 const displayProductCard = (data) => {
-    const cardContainer = document.getElementById('card-container')
     const cardDetails = document.getElementById('card-details');
     const inputError = document.getElementById('input-error')
+
+    // removing spinner when data is loaded
+    spinner.classList.add('d-none')
+
     // clearing cards and card details
     cardDetails.textContent = "";
-    cardContainer.textContent = "";
+
+    // condition for wrong input
     if (data.status == false) {
         inputError.classList.remove('d-none')
     } else {
@@ -51,6 +64,8 @@ const displayProductCard = (data) => {
 
 // arrow function for loading details
 const loadCardDetail = (id) => {
+    // add spinner when data is loading
+    spinner.classList.remove('d-none')
     const url = `https://openapi.programming-hero.com/api/phone/${id}`
     // fetching detail api
     fetch(url)
@@ -60,6 +75,8 @@ const loadCardDetail = (id) => {
 
 // arrow function for displaying details
 const displayCardDetail = (data) => {
+    // removing spinner when data is loaded
+    spinner.classList.add('d-none')
     console.log(data);
     const productDetail = data.data;
     const cardDetails = document.getElementById('card-details');
@@ -96,9 +113,9 @@ const displayCardDetail = (data) => {
         if (Array.isArray(feature[1])) {
             sensorsId.innerHTML = `<strong>${feature[0]}: </strong>`;
             for (const sensors of feature[1]) {
-                const li = document.createElement('span')
-                li.innerHTML = `${sensors}. `;
-                sensorsId.appendChild(li)
+                const span = document.createElement('span')
+                span.innerHTML = `${sensors}. `;
+                sensorsId.appendChild(span)
             }
         } else {
             mainFeaturesId.appendChild(p);
