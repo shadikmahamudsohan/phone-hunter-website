@@ -93,7 +93,7 @@ const displayCardDetail = (data) => {
                 <div class="col-lg-6 border-start border-dark border-3">
                     <h1>${productDetail.name}</h1>
                     <h4>Brand: ${productDetail.brand}</h4>
-                    <p class="text-danger">${productDetail.releaseDate ? productDetail.releaseDate : 'Not release date found'}</p>
+                    <p class="text-danger">${productDetail.releaseDate ? productDetail.releaseDate : 'No release date found'}</p>
                     <h4 class="mt-4"><u>Main features</u></h4>
                     <p id="features"></p>
                     <p id="sensors"></p>
