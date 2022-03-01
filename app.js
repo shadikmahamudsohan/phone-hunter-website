@@ -27,7 +27,7 @@ const displayProductCard = (data) => {
             const div = document.createElement('div');
             div.className = "col-lg-4"
             div.innerHTML = `
-                    <div class="card h-100">
+                    <div class="card h-100 shadow">
                         <img src="${product.image}"
                             class="card-img-top p-4 img-fluid" alt="image">
                         <div class="card-body">
@@ -68,7 +68,7 @@ const displayCardDetail = (data) => {
                     <p class="text-danger">${productDetail.releaseDate ? productDetail.releaseDate : 'not available'}</p>
                     <h4 class="mt-4"><u>Main features</u></h4>
                     <p id="features"></p>
-                    <ul id="sensors"></ul>
+                    <p id="sensors"></p>
                     <h4 class="mt-4"><u>Other features</u></h4>
                     <p id="other-features"></p>
                 </div>
@@ -80,11 +80,12 @@ const displayCardDetail = (data) => {
     mainFeatures.forEach(feature => {
         const p = document.createElement('p')
         p.innerHTML = `<strong>${feature[0]}:</strong> ${feature[1]}.`;
+        // displaying sensor details
         if (Array.isArray(feature[1])) {
-            sensorsId.innerHTML = `<strong>${feature[0]}:</strong> `;
+            sensorsId.innerHTML = `<strong>${feature[0]}: </strong>`;
             for (const sensors of feature[1]) {
-                const li = document.createElement('li')
-                li.innerHTML = `${sensors}`;
+                const li = document.createElement('span')
+                li.innerHTML = `${sensors}. `;
                 sensorsId.appendChild(li)
             }
         } else {
